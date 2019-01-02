@@ -63,13 +63,12 @@ Tore_Spielminute_Spieler <- function(Name, Team, Data) {
     }
   }
   Enddaten <- as.data.frame(t(Enddaten))
-  ggplot2::ggplot(Enddaten, ggplot2::aes(x=rownames(Enddaten), y=Enddaten$V1)) +
-    ggplot2::geom_col(fill="dark green") +
-    ggplot2::xlab("Spielabschnitt") +
-    ggplot2::ylab("Torgefährlichkeit") +
-    ggplot2::ggtitle(label=paste("Torgefährlichkeit laufende Saison", Name, sep = " ")) +
-    ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(),
-                   panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))
+   ggplot2::ggplot(Enddaten, ggplot2::aes(x=rownames(Enddaten), y=Enddaten$V1)) +
+     ggplot2::geom_col(fill="dark green") +
+     ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(), panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))+
+     ggplot2::xlab("Spielabschnitt") +
+     ggplot2::ylab("Torgefährlichkeit") +
+     ggplot2::ggtitle(label=paste("Torgefährlichkeit laufende Saison ", Name))
 }
 
 
