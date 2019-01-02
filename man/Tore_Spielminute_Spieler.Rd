@@ -4,7 +4,7 @@
 \alias{Tore_Spielminute_Spieler}
 \title{Title}
 \usage{
-Tore_Spielminute_Spieler(Name, Data)
+Tore_Spielminute_Spieler(Name, Team, Data)
 }
 \arguments{
 \item{Data}{}
