@@ -23,7 +23,7 @@ Kader <- function(Team, Data, order) {
   Abhängigkeit <- data.table::data.table()
 
   for(i in (1:length(Kader_Voll$Name))) {
-    Tore_Spieler <- Data[[1]] %>% dplyr::filter(Name==Kader_Voll$Name[i])
+    Tore_Spieler <- Data[[1]] %>% dplyr::filter(Mannschaft==Team, Name==Kader_Voll$Name[i] & !(`#` %in% c("OA", "OB", "OC", "OD", "OE", "OF")))
     Tore_M_S <- cbind(Tore_Mannschaft %>% dplyr::filter(Datum %in% Tore_Spieler$Datum), Tore_S=Tore_Spieler$Tore)
     Korrelation <- cor(Tore_M_S$Tore, Tore_M_S$Tore_S)
     Abh <- round(Kader_Voll$`% Tore`[i]*(1-Korrelation), 3)
