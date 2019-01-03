@@ -36,5 +36,5 @@ Zeitstrafen_Spielminute_Mannschaft <- function(Mannschaft, Data) {
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(), panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))+
     ggplot2::xlab("Spielabschnitt") +
     ggplot2::ylab("Zeitstrafen") +
-    ggplot2::ggtitle(label=paste("2 Minuten Strafen laufende Saison ", Mannschaft))
+    ggplot2::ggtitle(label=paste("2 Minuten ", Mannschaft))
 }
