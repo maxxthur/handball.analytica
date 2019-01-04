@@ -15,7 +15,7 @@ Kader <- function(Team, Data, order) {
   Kader_Voll <- TeamData %>%
     dplyr::group_by(Name, Mannschaft) %>%
     dplyr::summarise(Tore = sum(Tore) , Zeitstrafen = sum(`2min`), V = sum(V)) %>%
-    dplyr::mutate("% Tore"=Tore/sum(.$Tore)) %>%
+    dplyr::mutate("% Tore"=round((Tore/sum(.$Tore))*100,2)) %>%
     dplyr::select("Name", "Tore","% Tore", "Zeitstrafen", "V")
 
   Tore_Mannschaft <- Data[[1]] %>% dplyr::filter(Mannschaft==Team) %>% dplyr::group_by(Datum) %>% dplyr::summarise(Tore=sum(Tore))
