@@ -4,7 +4,7 @@
 \alias{Performance_last}
 \title{Title}
 \usage{
-Performance_last(Team, Data, Matches)
+Performance_last(Team, Data)
 }
 \arguments{
 \item{Matches}{}
