@@ -31,6 +31,7 @@ Zeitstrafen_Spielverlauf_Spieler <- function(Name, Data) {
   }
 
   Enddaten <- as.data.frame(t(Enddaten))
+  Enddaten$V1 <- Enddaten$V1/sum(Enddaten$V1)
   ggplot2::ggplot(Enddaten, ggplot2::aes(x=rownames(Enddaten), y=Enddaten$V1)) +
     ggplot2::geom_col(fill="dark red") +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(), panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))+
