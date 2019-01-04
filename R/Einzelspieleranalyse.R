@@ -9,12 +9,14 @@
 #'
 #' @examples
 Einzelspieleranalyse <- function(Player, Team, Data){
-  Mean_Tore <- mean(
+  Mean_Tore <- round(
+    mean(
     Data[[1]] %>%
       dplyr::filter(Name==Player) %>%
       dplyr::group_by(Datum) %>%
       dplyr::summarise(Tore=sum(Tore)) %>%
       .$Tore
+  ), 2
   )
 
   Gelbe_Gesamt <- sum(
