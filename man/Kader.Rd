@@ -4,10 +4,10 @@
 \alias{Kader}
 \title{Title}
 \usage{
-Kader(Team, Data, order)
+Kader(Team, Data)
 }
 \arguments{
-\item{ordering}{}
+\item{Data}{}
 }
 \description{
 Title

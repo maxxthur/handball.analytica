@@ -2,13 +2,12 @@
 #'
 #' @param Team
 #' @param Data
-#' @param ordering
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Kader <- function(Team, Data, order) {
+Kader <- function(Team, Data) {
   TeamData <- TeamData <- Data[[1]] %>%
     dplyr::filter(Mannschaft == Team & !(`#` %in% c("OA", "OB", "OC", "OD", "OE", "OF")))
 
@@ -31,17 +30,8 @@ Kader <- function(Team, Data, order) {
   }
 
   Output <- dplyr::left_join(Kader_Voll, Abhängigkeit)
-  ordering = if (order=="Tore") {
-    Output$Tore
-  } else if (order=="Abhängigkeit") {
-    Output$Abhängigkeit
-  } else if (order=="Zeitstrafen") {
-    Output$Zeitstrafen
-  } else if (order=="Gelbe Karten") {
-    Output$V
-  } else {Output$Tore}
 
-  Output %>% dplyr::arrange(desc(ordering))
+  Output
 }
 
 
