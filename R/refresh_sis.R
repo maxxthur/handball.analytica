@@ -1,17 +1,19 @@
-#' Diese Funktion tut etwas....
+#' Title
 #'
-#' @param liga die liga ID als string
+#' @param liga
+#' @param Old_URL
+#' @param Old_Data
 #'
-#' @return dunno something
+#' @return
 #' @export
 #'
 #' @examples
-#' df <- Scrape_SIS("ABC")
-Scrape_SIS <- function(liga = "001519505501509501000000000000000002007") {
+refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_URL, Old_Data) {
   URL_Alle_Spiele <- paste0("http://www.sis-handball.de/default.aspx?view=AlleSpiele&Liga=", liga)
   Dataset <- data.table::data.table()
   AllURLs <- rvest::html_attr(rvest::html_nodes(xml2::read_html(URL_Alle_Spiele), "a"), "href")
   URLs_Liveticker <- AllURLs[grep("^http://liveticker.sis-handball.org/game/", AllURLs)]
+  URLs_Liveticker <- URLs_Liveticker[URLs_Liveticker != Old_URL]
   Tordatenbank <- data.table::data.table()
   Strafendatenbank <- data.table::data.table()
   GelbeKartenDatenbank <- data.table::data.table()
@@ -109,6 +111,7 @@ Scrape_SIS <- function(liga = "001519505501509501000000000000000002007") {
   Dataset$V[Dataset$V == ""] <- 0
   Dataset$V <- as.integer(Dataset$V)
   Data <- list(Dataset, Results, Tordatenbank, Strafendatenbank, GelbeKartenDatenbank, URLs_Liveticker)
+  Data <- list(rbind(Old_Data[[1]],Data[[1]]), Data[[2]], rbind(Old_Data[[3]], Data[[3]]), rbind(Old_Data[[4]], Data[[4]]), rbind(Old_Data[[5]], Data[[5]], c(Old_URL, URLs_Liveticker)))
   saveRDS(Data, file="data.rds")
   Data
 }
