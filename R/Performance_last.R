@@ -37,7 +37,7 @@ Performance_last <- function(Team, Data) {
     dplyr::summarise(Tore=sum(Tore)) %>%
      dplyr::filter(Datum %in% Results$V1) %>%
      dplyr::group_by(Name) %>%
-     dplyr::summarise("durchschn. Tore"=mean(Tore)) %>%
+     dplyr::summarise("durchschn. Tore"=round(mean(Tore), 2)) %>%
      dplyr::arrange(desc(`durchschn. Tore`)) %>%
      .[1:3,]
 
