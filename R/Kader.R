@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-Kader <- function(Team, Data) {
+Kader <- function(Team, Data, order) {
   TeamData <- TeamData <- Data[[1]] %>%
     dplyr::filter(Mannschaft == Team & !(`#` %in% c("OA", "OB", "OC", "OD", "OE", "OF")))
 
@@ -41,7 +41,7 @@ Kader <- function(Team, Data) {
     Output$V
   } else {Output$Tore}
 
-  Output
+  Output %>% dplyr::arrange(desc(ordering))
 }
 
 
