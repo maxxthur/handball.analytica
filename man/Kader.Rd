@@ -7,7 +7,7 @@
 Kader(Team, Data)
 }
 \arguments{
-\item{Data}{}
+\item{ordering}{}
 }
 \description{
 Title

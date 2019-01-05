@@ -2,6 +2,7 @@
 #'
 #' @param Team
 #' @param Data
+#' @param ordering
 #'
 #' @return
 #' @export
@@ -30,6 +31,15 @@ Kader <- function(Team, Data) {
   }
 
   Output <- dplyr::left_join(Kader_Voll, Abhängigkeit)
+  ordering = if (order=="Tore") {
+    Output$Tore
+  } else if (order=="Abhängigkeit") {
+    Output$Abhängigkeit
+  } else if (order=="Zeitstrafen") {
+    Output$Zeitstrafen
+  } else if (order=="Gelbe Karten") {
+    Output$V
+  } else {Output$Tore}
 
   Output
 }
