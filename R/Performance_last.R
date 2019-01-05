@@ -11,10 +11,10 @@
 #' @examples
 Performance_last <- function(Team, Data) {
   Results <- data.table::data.table()
-  TeamData <- Data[[2]] %>% dplyr::filter(Heim == "DJK Grün-Weiß Nottuln" | Gast == "DJK Grün-Weiß Nottuln")
-  Tore_Mannschaft <- Data[[1]] %>% dplyr::filter(Mannschaft=="DJK Grün-Weiß Nottuln") %>% dplyr::group_by(Datum, Name) %>% dplyr::summarise(Tore=sum(Tore)) %>% dplyr::ungroup() %>% dplyr::mutate(Datum=as.character(Datum))
+  TeamData <- Data[[2]] %>% dplyr::filter(Heim == Team | Gast == Team)
+  Tore_Mannschaft <- Data[[1]] %>% dplyr::filter(Mannschaft==Team) %>% dplyr::group_by(Datum, Name) %>% dplyr::summarise(Tore=sum(Tore)) %>% dplyr::ungroup() %>% dplyr::mutate(Datum=as.character(Datum))
   for (i in ((nrow(TeamData) - 2):nrow(TeamData))) {
-    if (TeamData$Heim[i] == "DJK Grün-Weiß Nottuln") {
+    if (TeamData$Heim[i] == Team) {
       if (TeamData$Tore_Heim[i] > TeamData$Tore_Gast[i]) {
         Results <- rbind(Results, cbind(as.character(TeamData$Datum[i]),"Sieg", "Heim", TeamData$Gast[i], TeamData$Tore[i]))
       } else if (TeamData$Tore_Heim[i] == TeamData$Tore_Gast[i]) {
