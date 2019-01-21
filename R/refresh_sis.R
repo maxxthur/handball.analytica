@@ -14,6 +14,9 @@ refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_UR
   AllURLs <- rvest::html_attr(rvest::html_nodes(xml2::read_html(URL_Alle_Spiele), "a"), "href")
   URLs_Liveticker <- AllURLs[grep("^http://liveticker.sis-handball.org/game/", AllURLs)]
   URLs_Liveticker <- URLs_Liveticker[URLs_Liveticker != Old_URL]
+  if(length(URLs_Liveticker)==0) {
+
+  } else {
   Tordatenbank <- data.table::data.table()
   Strafendatenbank <- data.table::data.table()
   GelbeKartenDatenbank <- data.table::data.table()
@@ -114,4 +117,5 @@ refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_UR
   Data <- list(rbind(Old_Data[[1]],Data[[1]]), Data[[2]], rbind(Old_Data[[3]], Data[[3]]), rbind(Old_Data[[4]], Data[[4]]), rbind(Old_Data[[5]], Data[[5]]), c(Old_URL, URLs_Liveticker)) # hier überprüfen
   saveRDS(Data, file="data.rds")
   Data
+  }
 }
