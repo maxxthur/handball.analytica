@@ -107,6 +107,7 @@ Scrape_SIS <- function(liga = "001519505501509501000000000000000002007") {
 
   Dataset$V[Dataset$V == "x"] <- 1
   Dataset$V[Dataset$V == ""] <- 0
+  Dataset$V[is.na(Dataset$V)] <- 0
   Dataset$V <- as.integer(Dataset$V)
   Data <- list(Dataset, Results, Tordatenbank, Strafendatenbank, GelbeKartenDatenbank, URLs_Liveticker)
   saveRDS(Data, file="data.rds")
