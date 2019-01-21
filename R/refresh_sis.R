@@ -55,7 +55,7 @@ refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_UR
     homecomplete <- cbind(Datum = rep(date, each = nrow(home)), Mannschaft = rep(hometeam, each = nrow(home)), Gegner = rep(guestteam, each = nrow(home)), home)
     guestcomplete <- cbind(Datum = rep(date, each = nrow(guest)), Mannschaft = rep(guestteam, each = nrow(guest)), Gegner = rep(hometeam, each = nrow(guest)), guest)
     Gamecomplete <- rbind(homecomplete, guestcomplete)
-    Dataset <- rbind(Dataset, Gamecomplete)
+    Dataset <- rbind(Dataset, Gamecomplete) #hier überprüfen
 
     Spielverlauf <- URLs_Liveticker[i] %>%
       xml2::read_html() %>%
@@ -111,7 +111,7 @@ refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_UR
   Dataset$V[Dataset$V == ""] <- 0
   Dataset$V <- as.integer(Dataset$V)
   Data <- list(Dataset, Results, Tordatenbank, Strafendatenbank, GelbeKartenDatenbank, URLs_Liveticker)
-  Data <- list(rbind(Old_Data[[1]],Data[[1]]), Data[[2]], rbind(Old_Data[[3]], Data[[3]]), rbind(Old_Data[[4]], Data[[4]]), rbind(Old_Data[[5]], Data[[5]], c(Old_URL, URLs_Liveticker)))
+  Data <- list(rbind(Old_Data[[1]],Data[[1]]), Data[[2]], rbind(Old_Data[[3]], Data[[3]]), rbind(Old_Data[[4]], Data[[4]]), rbind(Old_Data[[5]], Data[[5]]), c(Old_URL, URLs_Liveticker)) # hier überprüfen
   saveRDS(Data, file="data.rds")
   Data
 }

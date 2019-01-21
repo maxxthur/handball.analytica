@@ -70,11 +70,56 @@ Einzelspieleranalyse <- function(Player, Team, Data){
     ggplot2::ylab("Gelbe Karten") +
     ggplot2::ggtitle(label=paste("Gelbe Karten ", Player))
 
-  Torgefahr <- handball.analytica::Tore_Spielminute_Spieler(Player, Team, Data)
-  Zeitstrafen <- handball.analytica::Zeitstrafen_Spielverlauf_Spieler(Player, Data)
-  Gelbe <- handball.analytica::GelbeKarten_Spielverlauf_Spieler(Player, Data)
 
-  plot1 <- ggpubr::ggarrange(Torgefahr, Zeitstrafen, Gelbe, ncol=3, nrow=1)
-  plot <- ggpubr::ggarrange(Tore_Spiele, Zeitstrafen_Spiele, Gelbe_Spiele, plot1, ncol=1, nrow=4)
+
+  if(Mean_Tore==0 & Gelbe_Gesamt==0 & Zeitstrafen_Gesamt==0) {
+
+  } else if(Gelbe_Gesamt==0 & Zeitstrafen_Gesamt==0 & Mean_Tore!=0) {
+    Torgefahr <- handball.analytica::Tore_Spielminute_Spieler(Player, Team, Data)
+
+    plot1 <- ggpubr::ggarrange(Torgefahr, ncol=1, nrow=1)
+    plot <- ggpubr::ggarrange(Tore_Spiele, plot1, ncol=1, nrow=2)
+    list(plot, Fundamentals)
+  } else if(Mean_Tore==0 & Gelbe_Gesamt==0 & Zeitstrafen_Gesamt!=0) {
+    Zeitstrafen <- handball.analytica::Zeitstrafen_Spielverlauf_Spieler(Player, Data)
+
+    plot1 <- ggpubr::ggarrange(Zeitstrafen, ncol=1, nrow=1)
+    plot <- ggpubr::ggarrange(Zeitstrafen_Spiele, plot1, ncol=1, nrow=2)
+    list(plot, Fundamentals)
+  } else if(Mean_Tore==0 & Gelbe_Gesamt!=0 & Zeitstrafen_Gesamt==0) {
+    Gelbe <- handball.analytica::GelbeKarten_Spielverlauf_Spieler(Player, Data)
+
+  plot1 <- ggpubr::ggarrange(Gelbe, ncol=1, nrow=1)
+  plot <- ggpubr::ggarrange(Gelbe_Spiele, plot1, ncol=1, nrow=2)
   list(plot, Fundamentals)
+  } else if(Mean_Tore!=0 & Gelbe_Gesamt!=0 & Zeitstrafen_Gesamt==0) {
+    Torgefahr <- handball.analytica::Tore_Spielminute_Spieler(Player, Team, Data)
+    Gelbe <- handball.analytica::GelbeKarten_Spielverlauf_Spieler(Player, Data)
+
+    plot1 <- ggpubr::ggarrange(Torgefahr, Gelbe, ncol=2, nrow=1)
+    plot <- ggpubr::ggarrange(Tore_Spiele, Gelbe_Spiele, plot1, ncol=1, nrow=3)
+    list(plot, Fundamentals)
+  } else if(Mean_Tore!=0 & Gelbe_Gesamt==0 & Zeitstrafen_Gesamt!=0) {
+    Torgefahr <- handball.analytica::Tore_Spielminute_Spieler(Player, Team, Data)
+    Zeitstrafen <- handball.analytica::Zeitstrafen_Spielverlauf_Spieler(Player, Data)
+
+    plot1 <- ggpubr::ggarrange(Torgefahr, Zeitstrafen, ncol=2, nrow=1)
+    plot <- ggpubr::ggarrange(Tore_Spiele ,Zeitstrafen_Spiele, plot1, ncol=1, nrow=3)
+    list(plot, Fundamentals)
+  } else if(Mean_Tore==0 & Gelbe_Gesamt!=0 & Zeitstrafen_Gesamt!=0) {
+    Zeitstrafen <- handball.analytica::Zeitstrafen_Spielverlauf_Spieler(Player, Data)
+    Gelbe <- handball.analytica::GelbeKarten_Spielverlauf_Spieler(Player, Data)
+
+    plot1 <- ggpubr::ggarrange(Zeitstrafen, Gelbe, ncol=2, nrow=1)
+    plot <- ggpubr::ggarrange(Zeitstrafen_Spiele, Gelbe_Spiele, plot1, ncol=1, nrow=3)
+    list(plot, Fundamentals)
+  } else {
+    Torgefahr <- handball.analytica::Tore_Spielminute_Spieler(Player, Team, Data)
+    Zeitstrafen <- handball.analytica::Zeitstrafen_Spielverlauf_Spieler(Player, Data)
+    Gelbe <- handball.analytica::GelbeKarten_Spielverlauf_Spieler(Player, Data)
+
+    plot1 <- ggpubr::ggarrange(Torgefahr, Zeitstrafen, Gelbe, ncol=3, nrow=1)
+    plot <- ggpubr::ggarrange(Tore_Spiele, Zeitstrafen_Spiele, Gelbe_Spiele, plot1, ncol=1, nrow=4)
+    list(plot, Fundamentals)
+  }
 }
