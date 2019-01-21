@@ -112,6 +112,7 @@ refresh_sis <- function(liga = "001519505501509501000000000000000002007", Old_UR
 
   Dataset$V[Dataset$V == "x"] <- 1
   Dataset$V[Dataset$V == ""] <- 0
+  Dataset$V[is.na(Dataset$V)] <- 0
   Dataset$V <- as.integer(Dataset$V)
   Data <- list(Dataset, Results, Tordatenbank, Strafendatenbank, GelbeKartenDatenbank, URLs_Liveticker)
   Data <- list(rbind(Old_Data[[1]],Data[[1]]), Data[[2]], rbind(Old_Data[[3]], Data[[3]]), rbind(Old_Data[[4]], Data[[4]]), rbind(Old_Data[[5]], Data[[5]]), c(Old_URL, URLs_Liveticker)) # hier überprüfen
